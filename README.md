@@ -28,6 +28,8 @@ pnpm build
 
 Viteの `base` はGitHub Actions上ではリポジトリ名から自動で `/<repo-name>/` に設定されます。ローカル開発では `/` のまま動きます。
 
+GitHub Pagesの公開ビルドでは、VRMファイルをPages成果物へ同梱せず、GitHub raw URLから読み込みます。ローカル開発では `public/avatar.vrm` を読み込みます。
+
 ## VRMファイルの配置
 
 アプリは `public/avatar.vrm` を読み込みます。
