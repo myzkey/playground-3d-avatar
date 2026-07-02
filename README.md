@@ -1,50 +1,50 @@
 # Three.js + React + VRM Sample App
 
-React SPA + TypeScriptで作った、ブラウザ上でVRMアバターを表示・操作するサンプルアプリです。
+A sample React SPA built with TypeScript for displaying and controlling a VRM avatar in the browser.
 
-## セットアップ
+## Setup
 
 ```bash
 pnpm install
 ```
 
-## 起動
+## Development
 
 ```bash
 pnpm dev
 ```
 
-Viteの開発サーバーが起動したら、表示されたURLをブラウザで開いてください。
+After the Vite dev server starts, open the displayed URL in your browser.
 
-## ビルド
+## Build
 
 ```bash
 pnpm build
 ```
 
-## GitHub Pagesで公開
+## GitHub Pages Deployment
 
-`main` ブランチへpushすると、GitHub Actionsが `pnpm build` を実行して `dist` をGitHub Pagesへデプロイします。
+Pushing to the `main` branch runs GitHub Actions, builds the app with `pnpm build`, and publishes the generated files for GitHub Pages.
 
-Viteの `base` はGitHub Actions上ではリポジトリ名から自動で `/<repo-name>/` に設定されます。ローカル開発では `/` のまま動きます。
+On GitHub Actions, Vite's `base` is automatically set from the repository name as `/<repo-name>/`. In local development, it stays `/`.
 
-GitHub Pagesの公開ビルドでは、VRMファイルをPages成果物へ同梱せず、GitHub raw URLから読み込みます。ローカル開発では `public/avatar.vrm` を読み込みます。
+For the GitHub Pages production build, the VRM file is not bundled into the Pages artifact. Instead, the app loads it from a GitHub raw URL. In local development, the app loads `public/avatar.vrm`.
 
-## VRMファイルの配置
+## VRM Model Placement
 
-アプリは `public/avatar.vrm` を読み込みます。
-
-現在のサンプルには、`madjin/vrm-samples` の `vroid/stable/AvatarSample_C.vrm` を配置しています。AvatarSample_A・B・CはCC0ではなく、VRoid Studioサンプルモデルの利用条件に従って利用してください。
-
-任意のVRMモデルに差し替える場合は、VRMファイルを以下のパスに配置してください。
+The app loads a VRM model from:
 
 ```txt
 public/avatar.vrm
 ```
 
-ファイル名や配置場所を変える場合は、`src/shared/config/avatar.ts` の `AVATAR_MODEL_URL` を変更します。
+The current sample uses `vroid/stable/AvatarSample_C.vrm` from `madjin/vrm-samples`. AvatarSample_A, AvatarSample_B, and AvatarSample_C are not CC0 models, so use them according to the VRoid Studio sample model terms.
 
-## 使用ライブラリ
+To replace the avatar, put another VRM file at `public/avatar.vrm`.
+
+If you want to change the file name or location, update `AVATAR_MODEL_URL` in `src/shared/config/avatar.ts`.
+
+## Libraries
 
 - Vite
 - React
@@ -55,7 +55,7 @@ public/avatar.vrm
 - @react-three/drei
 - @pixiv/three-vrm
 
-## ディレクトリ構成
+## Directory Structure
 
 ```txt
 src/
@@ -99,36 +99,36 @@ src/
       avatar.ts
 ```
 
-## Feature-Sliced Design上の責務分離
+## Feature-Sliced Design Responsibilities
 
-- `app`: Reactのエントリーポイント、グローバルスタイル、アプリ全体のProvider置き場
-- `pages`: ページ単位の構成。今回はアバター操作画面全体を管理
-- `widgets`: ページ内の大きなUIブロック。今回は3Dビューア
-- `features`: 表情変更、アニメーション変更、リセットなどユーザー操作ごとのUI
-- `entities`: VRMアバターの型、ボーン操作、表情反映、Three.js連携
-- `shared`: 汎用UI、共通関数、設定値
+- `app`: React entry point, global styles, and app-wide provider location
+- `pages`: Page-level composition. This app has the avatar control page
+- `widgets`: Large page sections. This app has the 3D avatar viewer
+- `features`: User actions such as changing expressions, changing animations, and resetting the avatar
+- `entities`: Avatar-specific types, bone control, expression handling, and Three.js / VRM integration
+- `shared`: Reusable UI, utilities, and configuration
 
-Three.jsとVRMに直接触る処理は、主に `entities/avatar` に閉じ込めています。
+Three.js and VRM-specific logic is kept mainly inside `entities/avatar`.
 
-## 実装済みの操作
+## Implemented Controls
 
-- VRMモデル表示
-- OrbitControlsによる回転、ズーム、パン
-- 表情変更: Neutral / Happy / Angry / Sad / Surprised
-- アニメーション切り替え: Idle / Wave
-- マウスカーソルに合わせた顔と視線の追従
-- リセット
-- PC / タブレット向けのレスポンシブレイアウト
+- Display a VRM model
+- Rotate, zoom, and pan with OrbitControls
+- Change expressions: Neutral / Happy / Angry / Sad / Surprised
+- Switch animations: Idle / Wave
+- Make the face and gaze follow the mouse cursor
+- Reset the avatar
+- Responsive layout for desktop and tablet-sized screens
 
-## 今後追加しやすい機能
+## Future Extensions
 
-- 音声入力
-- 音声合成
-- リップシンク
-- ChatGPT等との連携
-- アニメーション追加
-- VRM差し替え
-- 背景変更
-- キャラクター選択
+- Voice input
+- Text-to-speech
+- Lip sync
+- ChatGPT or other AI integration
+- Additional animations
+- VRM model switching
+- Background switching
+- Character selection
 
-追加する場合は、操作UIを `features`、VRMや音声などのドメイン処理を `entities`、画面上のまとまった体験を `widgets` に寄せると拡張しやすくなります。
+When adding new features, keep interaction UI in `features`, domain logic such as VRM or audio handling in `entities`, and larger user-facing sections in `widgets`.
