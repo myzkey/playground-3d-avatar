@@ -1,0 +1,21 @@
+.avatar-viewer {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(129, 143, 160, 0.45);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.9), rgba(238, 241, 244, 0) 42%),
+    #eef1f4;
+}
+
+.avatar-viewer canvas {
+  display: block;
+}
+
+.avatar-viewer__loading {
+  color: #59677b;
+  font-size: 0.9rem;
+  font-weight: 650;
+  white-space: nowrap;
+}

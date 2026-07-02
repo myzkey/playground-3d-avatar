@@ -1,0 +1,19 @@
+.control-group {
+  display: grid;
+  gap: 12px;
+}
+
+.control-group__title {
+  margin: 0;
+  color: #59677b;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.control-group__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
